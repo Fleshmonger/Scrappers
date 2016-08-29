@@ -4,7 +4,7 @@ using System.Collections;
 public class Projectile : Unit
 {
     public Vector2 direction = Vector2.zero;
-    [SerializeField] private int _damage;
+    private int _damage;
     [SerializeField] private float _lifespan;
 
     public int Damage

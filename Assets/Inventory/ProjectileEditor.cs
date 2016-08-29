@@ -9,7 +9,6 @@ public class ProjectileEditor : UnitEditor
         base.OnInspectorGUI();
         Projectile projectile = target as Projectile;
 
-        projectile.Damage = EditorGUILayout.IntField("Damage", projectile.Damage);
         projectile.Lifespan = EditorGUILayout.FloatField("Lifespan", projectile.Lifespan);
     }
 }

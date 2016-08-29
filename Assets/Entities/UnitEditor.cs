@@ -12,5 +12,6 @@ public class UnitEditor : Editor
         unit.invulnerable = EditorGUILayout.Toggle("Invulnerable", unit.invulnerable);
         unit.Health = EditorGUILayout.IntField("Health", unit.Health);
         unit.Speed = EditorGUILayout.IntField("Speed", unit.Speed);
+        serializedObject.ApplyModifiedProperties();
     }
 }

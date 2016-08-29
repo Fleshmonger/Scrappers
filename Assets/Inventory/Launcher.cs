@@ -11,6 +11,7 @@ public class Launcher : Weapon
         if (Ready())
         {
             Projectile projectile = Instantiate<Projectile>(projectilePrefab);
+            projectile.Damage = Damage;
             projectile.transform.position = origin;
             projectile.direction = target - origin;
             ResetCooldown();
