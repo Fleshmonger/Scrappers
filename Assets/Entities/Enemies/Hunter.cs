@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Monster : Unit
+public class Hunter : Unit
 {
     public Player player;
     public Weapon weapon;
@@ -14,5 +14,6 @@ public class Monster : Unit
     private void FixedUpdate()
     {
         Move(player.transform.position - transform.position);
+        Attack(weapon, player.transform.position);
     }
 }

@@ -30,9 +30,9 @@ public class Player : Unit
         }
         Move(direction);
 
-        if (InputShoot())
+        if (InputShoot() && weapon)
         {
-            weapon.Attack(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            Attack(weapon, Camera.main.ScreenToWorldPoint(Input.mousePosition));
         }
     }
 

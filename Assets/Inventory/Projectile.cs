@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class Projectile : Unit
+public class Projectile : Entity
 {
     public Vector2 direction = Vector2.zero;
     private int _damage;

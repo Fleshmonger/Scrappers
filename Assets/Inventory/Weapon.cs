@@ -46,5 +46,10 @@ public abstract class Weapon : ScriptableObject
         lastAttackTime = Time.timeSinceLevelLoad;
     }
 
-    abstract public bool Attack(Vector2 origin, Vector2 target);
+    // Returns whether the weapon can hit the given target.
+    abstract public bool Targetable(Vector2 origin, Vector2 target);
+
+    // Performs an attack towards the target, with the given layer as source.
+    // Layers are expected to either be Player or Enemy; the attack will ignore the given layer.
+    abstract public bool Attack(Vector2 origin, Vector2 target, int layer);
 }

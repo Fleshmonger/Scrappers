@@ -11,5 +11,7 @@ public class WeaponEditor : Editor
 
         weapon.Damage = EditorGUILayout.IntField("Damage", weapon.Damage);
         weapon.Cooldown = EditorGUILayout.FloatField("Cooldown", weapon.Cooldown);
+        EditorUtility.SetDirty(weapon);
+        serializedObject.ApplyModifiedProperties();
     }
 }

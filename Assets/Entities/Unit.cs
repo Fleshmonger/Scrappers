@@ -1,22 +1,11 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class Unit : MonoBehaviour
+public class Unit : Entity
 {
     public bool invulnerable = false;
-    [SerializeField] private int _speed, _health;
+    public Faction faction;
+    [SerializeField] private int _health;
 
-    public int Speed
-    {
-        get
-        {
-            return _speed;
-        }
-        set
-        {
-            _speed = Mathf.Max(0, value);
-        }
-    }
     public int Health
     {
         get
@@ -25,22 +14,13 @@ public class Unit : MonoBehaviour
         }
         set
         {
-            _health = Mathf.Max(0, value);
+            _health = Mathf.Max(value, 0);
         }
     }
 
-    public void Move(Vector2 direction)
+    public void Attack(Weapon weapon, Vector2 target)
     {
-        Rigidbody2D body = GetComponent<Rigidbody2D>();
-        if (body)
-        {
-            body.velocity = direction.normalized * Speed;
-        }
-        else
-        {
-            Vector3 translation = direction.normalized * Speed * Time.deltaTime;
-            transform.position += translation;
-        }
+        weapon.Attack(transform.position, target, faction.attackLayer);
     }
 
     public void Hurt(int damage)

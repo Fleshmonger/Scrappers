@@ -2,7 +2,7 @@
 using UnityEditor;
 
 [CustomEditor(typeof(Projectile), true)]
-public class ProjectileEditor : UnitEditor
+public class ProjectileEditor : EntityEditor
 {
     public override void OnInspectorGUI()
     {
