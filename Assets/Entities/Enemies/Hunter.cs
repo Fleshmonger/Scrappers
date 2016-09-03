@@ -3,17 +3,17 @@ using System.Collections;
 
 public class Hunter : Unit
 {
-    public Player player;
+    private Entity target;
     public Weapon weapon;
 
     private void Awake()
     {
-        player = FindObjectOfType<Player>();
+        target = FindObjectOfType<Player>();
     }
 
     private void FixedUpdate()
     {
-        Move(player.transform.position - transform.position);
-        Attack(weapon, player.transform.position);
+        Move(target.transform.position - transform.position);
+        Attack(weapon, target.transform.position);
     }
 }
