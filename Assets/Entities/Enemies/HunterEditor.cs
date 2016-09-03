@@ -4,11 +4,10 @@ using UnityEditor;
 [CustomEditor(typeof(Hunter), true)]
 public class HunterEditor : UnitEditor
 {
-    public override void OnInspectorGUI()
+    protected override void UpdateContent()
     {
-        base.OnInspectorGUI();
+        base.UpdateContent();
         Hunter hunter = target as Hunter;
-
         hunter.player = EditorGUILayout.ObjectField("Player", hunter.player, typeof(Player), true) as Player;
         hunter.weapon = EditorGUILayout.ObjectField("Weapon", hunter.weapon, typeof(Weapon), true) as Weapon;
     }

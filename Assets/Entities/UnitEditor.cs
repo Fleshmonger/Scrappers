@@ -4,10 +4,10 @@ using UnityEditor;
 [CustomEditor(typeof(Unit), true)]
 public class UnitEditor : EntityEditor
 {
-    public override void OnInspectorGUI()
+    // Updates all the content in the inspector.
+    protected override void UpdateContent()
     {
-        serializedObject.Update();
-        base.OnInspectorGUI();
+        base.UpdateContent();
         Unit unit = target as Unit;
 
         unit.faction = EditorGUILayout.ObjectField("Faction", unit.faction, typeof(Faction), true) as Faction;
