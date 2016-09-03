@@ -2,16 +2,16 @@
 using UnityEditor;
 
 [CustomEditor(typeof(Weapon), true)]
-public class WeaponEditor : Editor
+public class WeaponEditor : BaseEditor
 {
-    public override void OnInspectorGUI()
+    protected override void UpdateContent()
     {
-        serializedObject.Update();
+        // Save any changes to the object.
+        EditorUtility.SetDirty(target);
+
         Weapon weapon = target as Weapon;
 
         weapon.Damage = EditorGUILayout.IntField("Damage", weapon.Damage);
         weapon.Cooldown = EditorGUILayout.FloatField("Cooldown", weapon.Cooldown);
-        EditorUtility.SetDirty(weapon);
-        serializedObject.ApplyModifiedProperties();
     }
 }

@@ -4,11 +4,10 @@ using UnityEditor;
 [CustomEditor(typeof(Hitscan), true)]
 public class HitscanEditor : WeaponEditor
 {
-    public override void OnInspectorGUI()
+    protected override void UpdateContent()
     {
-        base.OnInspectorGUI();
+        base.UpdateContent();
         Hitscan hitscan = target as Hitscan;
-
         hitscan.Range = EditorGUILayout.FloatField("Range", hitscan.Range);
     }
 }

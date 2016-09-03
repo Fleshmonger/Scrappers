@@ -2,6 +2,18 @@
 
 public class Entity : MonoBehaviour
 {
+    public int Test
+    {
+        get
+        {
+            return Test;
+        }
+        set
+        {
+            Test = value;
+        }
+    }
+
     [SerializeField] private float _speed;
 
     public float Speed

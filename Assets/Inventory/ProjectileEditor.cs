@@ -4,11 +4,10 @@ using UnityEditor;
 [CustomEditor(typeof(Projectile), true)]
 public class ProjectileEditor : EntityEditor
 {
-    public override void OnInspectorGUI()
+    protected override void UpdateContent()
     {
-        base.OnInspectorGUI();
+        base.UpdateContent();
         Projectile projectile = target as Projectile;
-
         projectile.Lifespan = EditorGUILayout.FloatField("Lifespan", projectile.Lifespan);
     }
 }

@@ -4,11 +4,6 @@ public class Player : Unit
 {
     public Weapon weapon;
 
-    private void Awake()
-    {
-        //weapon.ResetCooldown();
-    }
-
     private void FixedUpdate()
     {
         Vector3 direction = Vector3.zero;

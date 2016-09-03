@@ -4,11 +4,10 @@ using UnityEditor;
 [CustomEditor(typeof(Launcher), true)]
 public class LauncherEditor : WeaponEditor
 {
-    public override void OnInspectorGUI()
+    protected override void UpdateContent()
     {
-        base.OnInspectorGUI();
+        base.UpdateContent();
         Launcher launcher = target as Launcher;
-
         launcher.projectilePrefab = EditorGUILayout.ObjectField("Projectile Prefab", launcher.projectilePrefab, typeof(Projectile), true) as Projectile;
     }
 }
