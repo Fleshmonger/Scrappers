@@ -13,6 +13,5 @@ public class UnitEditor : EntityEditor
         unit.faction = EditorGUILayout.ObjectField("Faction", unit.faction, typeof(Faction), true) as Faction;
         unit.invulnerable = EditorGUILayout.Toggle("Invulnerable", unit.invulnerable);
         unit.Health = EditorGUILayout.IntField("Health", unit.Health);
-        serializedObject.ApplyModifiedProperties();
     }
 }

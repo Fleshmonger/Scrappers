@@ -20,7 +20,15 @@ public class Unit : Entity
 
     public void Attack(Weapon weapon, Vector2 target)
     {
-        weapon.Attack(transform.position, target, faction.attackLayer);
+        if (weapon)
+        {
+            int attackLayer = 0;
+            if (faction)
+            {
+                attackLayer = faction.attackLayer;
+            }
+            weapon.Attack(transform.position, target, attackLayer);
+        }
     }
 
     public void Hurt(int damage)
