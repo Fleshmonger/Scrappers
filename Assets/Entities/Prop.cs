@@ -1,32 +1,42 @@
 ﻿using UnityEngine;
 
+// Destructible gameObject
 public class Prop : MonoBehaviour
 {
-    [SerializeField] private float _speed;
+    public bool invulnerable = false;
 
-    public float Speed
+    [SerializeField]
+    private int _health;
+
+    public int Health
     {
         get
         {
-            return _speed;
+            return _health;
         }
         set
         {
-            _speed = Mathf.Max(value, 0f);
+            _health = Mathf.Max(value, 0);
         }
     }
 
-    public void Move(Vector2 direction)
+    // Damages the prop by the given damage amount.
+    // Destroys the gameobject if the prop dies.
+    public void Hurt(int damage)
     {
-        Rigidbody2D body = GetComponent<Rigidbody2D>();
-        if (body)
+        if (!invulnerable || damage > 0)
         {
-            body.velocity = direction.normalized * Speed;
+            Health -= damage;
+            if (IsDead())
+            {
+                Destroy(gameObject);
+            }
         }
-        else
-        {
-            Vector3 translation = direction.normalized * Speed * Time.deltaTime;
-            transform.position += translation;
-        }
+    }
+
+    // Returns whether the prop has lost all health.
+    public bool IsDead()
+    {
+        return !invulnerable && Health <= 0;
     }
 }

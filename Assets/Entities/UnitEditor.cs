@@ -11,7 +11,6 @@ public class UnitEditor : PropEditor
         Unit unit = target as Unit;
 
         unit.faction = EditorGUILayout.ObjectField("Faction", unit.faction, typeof(Faction), true) as Faction;
-        unit.invulnerable = EditorGUILayout.Toggle("Invulnerable", unit.invulnerable);
-        unit.Health = EditorGUILayout.IntField("Health", unit.Health);
+        unit.Speed = EditorGUILayout.FloatField("Speed", unit.Speed);
     }
 }

@@ -7,7 +7,8 @@ public class PropEditor : BaseEditor
     // Updates all the content in the inspector.
     protected override void UpdateContent()
     {
-        Prop entity = target as Prop;
-        entity.Speed = EditorGUILayout.FloatField("Speed", entity.Speed);
+        Prop prop = target as Prop;
+        prop.invulnerable = EditorGUILayout.Toggle("Invulnerable", prop.invulnerable);
+        prop.Health = EditorGUILayout.IntField("Health", prop.Health);
     }
 }

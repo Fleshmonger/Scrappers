@@ -1,23 +1,26 @@
 ﻿using UnityEngine;
 
+// Mobile and attacking gameObject.
 public class Unit : Prop
 {
-    public bool invulnerable = false;
     public Faction faction;
-    [SerializeField] private int _health;
 
-    public int Health
+    [SerializeField]
+    private float _speed;
+
+    public float Speed
     {
         get
         {
-            return _health;
+            return _speed;
         }
         set
         {
-            _health = Mathf.Max(value, 0);
+            _speed = Mathf.Max(value, 0f);
         }
     }
 
+    // TODO Move this to weapons.
     public void Attack(Weapon weapon, Vector2 target)
     {
         if (weapon)
@@ -31,20 +34,18 @@ public class Unit : Prop
         }
     }
 
-    public void Hurt(int damage)
+    // Moves the unit. If a rigidbody2d is attached, sets a velocity instead.
+    public void Move(Vector2 direction)
     {
-        if (!invulnerable || damage > 0)
+        Rigidbody2D body = GetComponent<Rigidbody2D>();
+        if (body)
         {
-            Health -= damage;
-            if (IsDead())
-            {
-                Destroy(gameObject);
-            }
+            body.velocity = direction.normalized * Speed;
         }
-    }
-
-    public bool IsDead()
-    {
-        return !invulnerable && Health <= 0;
+        else
+        {
+            Vector3 translation = direction.normalized * Speed * Time.deltaTime;
+            transform.position += translation;
+        }
     }
 }
