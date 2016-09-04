@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Unit : Entity
+public class Unit : Prop
 {
     public bool invulnerable = false;
     public Faction faction;

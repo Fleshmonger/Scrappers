@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Entity : MonoBehaviour
+public class Prop : MonoBehaviour
 {
     [SerializeField] private float _speed;
 

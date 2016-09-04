@@ -2,7 +2,7 @@
 using UnityEditor;
 
 [CustomEditor(typeof(Unit), true)]
-public class UnitEditor : EntityEditor
+public class UnitEditor : PropEditor
 {
     // Updates all the content in the inspector.
     protected override void UpdateContent()

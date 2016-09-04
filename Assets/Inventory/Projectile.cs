@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-public class Projectile : Entity
+public class Projectile : MonoBehaviour
 {
     public Vector2 direction = Vector2.zero;
     private int _damage;
-    [SerializeField] private float _lifespan;
+    [SerializeField] private float _speed, _lifespan;
 
     public int Damage
     {
@@ -15,6 +15,17 @@ public class Projectile : Entity
         set
         {
             _damage = Mathf.Max(value, 0);
+        }
+    }
+    public float Speed
+    {
+        get
+        {
+            return _speed;
+        }
+        set
+        {
+            _speed = Mathf.Max(value, 0f);
         }
     }
     public float Lifespan
@@ -36,7 +47,8 @@ public class Projectile : Entity
 
     private void Update()
     {
-        Move(direction);
+        Vector3 translation = direction.normalized * Speed * Time.deltaTime;
+        transform.position += translation;
     }
 
     void OnTriggerEnter2D(Collider2D other)

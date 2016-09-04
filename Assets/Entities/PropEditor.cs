@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(Entity), true)]
-public class EntityEditor : BaseEditor
+[CustomEditor(typeof(Prop), true)]
+public class PropEditor : BaseEditor
 {
     // Updates all the content in the inspector.
     protected override void UpdateContent()
     {
-        Entity entity = target as Entity;
+        Prop entity = target as Prop;
         entity.Speed = EditorGUILayout.FloatField("Speed", entity.Speed);
     }
 }

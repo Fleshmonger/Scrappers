@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Hunter : Unit
 {
-    private Entity target;
+    private Prop target;
     public Weapon weapon;
 
     private void Awake()
