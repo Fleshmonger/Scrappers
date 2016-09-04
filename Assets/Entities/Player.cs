@@ -27,7 +27,7 @@ public class Player : Unit
 
         if (InputShoot() && weapon)
         {
-            Attack(weapon, Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            weapon.Attack(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), faction);
         }
     }
 

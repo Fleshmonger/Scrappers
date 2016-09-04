@@ -20,20 +20,6 @@ public class Unit : Prop
         }
     }
 
-    // TODO Move this to weapons.
-    public void Attack(Weapon weapon, Vector2 target)
-    {
-        if (weapon)
-        {
-            int attackLayer = 0;
-            if (faction)
-            {
-                attackLayer = faction.attackLayer;
-            }
-            weapon.Attack(transform.position, target, attackLayer);
-        }
-    }
-
     // Moves the unit. If a rigidbody2d is attached, sets a velocity instead.
     public void Move(Vector2 direction)
     {

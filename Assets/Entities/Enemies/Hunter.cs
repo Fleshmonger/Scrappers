@@ -14,6 +14,6 @@ public class Hunter : Unit
     private void FixedUpdate()
     {
         Move(target.transform.position - transform.position);
-        Attack(weapon, target.transform.position);
+        weapon.Attack(transform.position, target.transform.position, faction);
     }
 }
