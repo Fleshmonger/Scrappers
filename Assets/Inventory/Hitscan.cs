@@ -22,36 +22,27 @@ public class Hitscan : Weapon
         return Vector2.Distance(origin, target) <= Range;
     }
 
-    // If ready, makes a melee attack. Returns whether an attack was performed.
-    override public bool Attack(Vector2 origin, Vector2 target, Faction faction)
+    // Makes a racasted-attack.
+    override protected void Fire(Vector2 origin, Vector2 target, Faction faction)
     {
-        if (Ready())
+        // Mask "Ignore Raycast" layer
+        int layerMask = 1<<LayerMask.NameToLayer("Ignore Raycast");
+        if (faction)
         {
-            // Mask "Ignore Raycast" layer
-            int layerMask = 1<<LayerMask.NameToLayer("Ignore Raycast");
-            if (faction)
-            {
-                // Also mask friendly units and attacks.
-                layerMask = layerMask | (1 << faction.unitLayer) | (1 << faction.attackLayer);
-            }
-            // Flip mask to ignore the specified layers.
-            layerMask = ~layerMask;
-
-            RaycastHit2D rayHit = Physics2D.Raycast(origin, target - origin, Range, layerMask);
-            if (rayHit.collider)
-            {
-                Unit other = rayHit.collider.gameObject.GetComponent<Unit>();
-                if (other)
-                {
-                    other.Hurt(Damage);
-                }
-            }
-            ResetCooldown();
-            return true;
+            // Also mask friendly units and attacks.
+            layerMask = layerMask | (1 << faction.unitLayer) | (1 << faction.attackLayer);
         }
-        else
+        // Flip mask to ignore the specified layers.
+        layerMask = ~layerMask;
+
+        RaycastHit2D rayHit = Physics2D.Raycast(origin, target - origin, Range, layerMask);
+        if (rayHit.collider)
         {
-            return false;
+            Unit other = rayHit.collider.gameObject.GetComponent<Unit>();
+            if (other)
+            {
+                other.Hurt(Damage);
+            }
         }
     }
 }

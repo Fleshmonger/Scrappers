@@ -41,7 +41,7 @@ public abstract class Weapon : ScriptableObject
     }
 
     // Updates the last time an attack was performed.
-    protected void ResetCooldown()
+    private void ResetCooldown()
     {
         lastAttackTime = Time.timeSinceLevelLoad;
     }
@@ -49,7 +49,21 @@ public abstract class Weapon : ScriptableObject
     // Returns whether the weapon can hit the given target.
     abstract public bool Targetable(Vector2 origin, Vector2 target);
 
-    // Performs an attack towards the target, with the given layer as source.
-    // Layers are expected to either be Player or Enemy; the attack will ignore the given layer.
-    abstract public bool Attack(Vector2 origin, Vector2 target, Faction faction);
+    // Attempts to attack if the weapon is off cooldown. Returns whether an attack was performed.
+    public bool Attack(Vector2 origin, Vector2 target, Faction source)
+    {
+        if (Ready())
+        {
+            Fire(origin, target, source);
+            ResetCooldown();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    // Performs an attack towards the target with the faction as source.
+    abstract protected void Fire(Vector2 origin, Vector2 target, Faction source);
 }

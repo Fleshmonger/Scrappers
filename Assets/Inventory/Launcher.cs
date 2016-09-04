@@ -11,26 +11,17 @@ public class Launcher : Weapon
         return Vector2.Distance(origin, target) <= projectilePrefab.Speed * projectilePrefab.Lifespan;
     }
 
-    // If ready, launches a projectile. Returns whether an attack was performed.
-    override public bool Attack(Vector2 origin, Vector2 target, Faction faction)
+    // Launches a projectile.
+    override protected void Fire(Vector2 origin, Vector2 target, Faction faction)
     {
-        if (Ready())
+        Projectile projectile = Instantiate<Projectile>(projectilePrefab);
+        if (faction)
         {
-            Projectile projectile = Instantiate<Projectile>(projectilePrefab);
-            if (faction)
-            {
-                // Ignore friendly objects.
-                projectile.gameObject.layer = faction.attackLayer;
-            }
-            projectile.Damage = Damage;
-            projectile.transform.position = origin;
-            projectile.direction = target - origin;
-            ResetCooldown();
-            return true;
+            // Ignore friendly objects.
+            projectile.gameObject.layer = faction.attackLayer;
         }
-        else
-        {
-            return false;
-        }
+        projectile.Damage = Damage;
+        projectile.transform.position = origin;
+        projectile.direction = target - origin;
     }
 }
