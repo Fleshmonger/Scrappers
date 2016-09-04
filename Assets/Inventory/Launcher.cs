@@ -11,14 +11,17 @@ public class Launcher : Weapon
         return Vector2.Distance(origin, target) <= projectilePrefab.Speed * projectilePrefab.Lifespan;
     }
 
-    // If ready, makes a melee attack. Returns whether an attack was performed.
-    // Note, layerMask is currently unused.
-    override public bool Attack(Vector2 origin, Vector2 target, int layer)
+    // If ready, launches a projectile. Returns whether an attack was performed.
+    override public bool Attack(Vector2 origin, Vector2 target, Faction faction)
     {
         if (Ready())
         {
             Projectile projectile = Instantiate<Projectile>(projectilePrefab);
-            projectile.gameObject.layer = layer;
+            if (faction)
+            {
+                // Ignore friendly objects.
+                projectile.gameObject.layer = faction.attackLayer;
+            }
             projectile.Damage = Damage;
             projectile.transform.position = origin;
             projectile.direction = target - origin;

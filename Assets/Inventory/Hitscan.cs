@@ -23,11 +23,20 @@ public class Hitscan : Weapon
     }
 
     // If ready, makes a melee attack. Returns whether an attack was performed.
-    override public bool Attack(Vector2 origin, Vector2 target, int layer)
+    override public bool Attack(Vector2 origin, Vector2 target, Faction faction)
     {
         if (Ready())
         {
-            int layerMask = ~((1<<layer)|(1<<LayerMask.NameToLayer("Ignore Raycast"))); // Everything except "layer" and "IgnoreRayCast"
+            // Mask "Ignore Raycast" layer
+            int layerMask = 1<<LayerMask.NameToLayer("Ignore Raycast");
+            if (faction)
+            {
+                // Also mask friendly units and attacks.
+                layerMask = layerMask | (1 << faction.unitLayer) | (1 << faction.attackLayer);
+            }
+            // Flip mask to ignore the specified layers.
+            layerMask = ~layerMask;
+
             RaycastHit2D rayHit = Physics2D.Raycast(origin, target - origin, Range, layerMask);
             if (rayHit.collider)
             {
